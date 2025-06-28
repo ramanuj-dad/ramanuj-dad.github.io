@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Steps - System Setup Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d3436;
+            --accent-color: #00cec9;
+            --text-color: #2d3436;
+            --light-bg: #f5f6fa;
+            --code-bg: #2d3748;
+            --code-text: #e2e8f0;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .command-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .command-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            margin: -20px -20px 15px -20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: rgba(45, 52, 54, 0.9);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #00a8a5;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: var(--success-color);
+        }
+
+        .command-block code {
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background: #e6f3ff;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-box.warning {
+            background: #fff8e1;
+            border-left-color: var(--warning-color);
+        }
+
+        .info-box.success {
+            background: #f0fff4;
+            border-left-color: var(--success-color);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+            color: var(--accent-color);
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .command-block {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-key"></i> Access Steps</h1>
+            <p>SSH and Remote Desktop Configuration for Fedora Linux</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2><i class="fas fa-terminal"></i> SSH Server Setup</h2>
+                <p>Configure SSH access to your Fedora system for secure remote connections.</p>
+
+                <div class="info-box">
+                    <strong>Note:</strong> SSH allows secure command-line access to your system from remote locations.
+                </div>
+
+                <h3><span class="step-number">1</span>Install and Enable SSH Server</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Install OpenSSH Server
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo dnf install -y openssh-server
+sudo systemctl enable --now sshd</code>
+                </div>
+
+                <h3><span class="step-number">2</span>Check SSH Server Status</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Verify SSH Service
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo systemctl status sshd</code>
+                </div>
+
+                <h3><span class="step-number">3</span>Configure Firewall</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Open SSH Port in Firewall
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --reload</code>
+                </div>
+
+                <h3><span class="step-number">4</span>Verify Port is Open</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Check SSH Port Status
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo ss -tlnp | grep 22</code>
+                </div>
+
+                <div class="info-box success">
+                    <strong>Success!</strong> SSH server is now configured. You can connect using: <code>ssh username@server-ip</code>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-desktop"></i> Remote Desktop Setup (xrdp)</h2>
+                <p>Configure graphical remote desktop access using xrdp protocol.</p>
+
+                <div class="info-box warning">
+                    <strong>Important:</strong> xrdp provides GUI access but may have performance limitations compared to SSH.
+                </div>
+
+                <h3><span class="step-number">1</span>Install and Configure xrdp on Fedora Host</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Install xrdp Server
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo dnf install -y xrdp
+sudo systemctl enable --now xrdp
+sudo firewall-cmd --permanent --add-port=3389/tcp
+sudo firewall-cmd --reload</code>
+                </div>
+
+                <h3><span class="step-number">2</span>Install Remote Desktop Client (On Your Personal Debian Machine)</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Install Remmina RDP Client
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>sudo apt install remmina</code>
+                </div>
+
+                <h3><span class="step-number">3</span>Launch Remote Desktop Client</h3>
+                <div class="command-block">
+                    <div class="command-header">
+                        Start Remmina
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <code>remmina</code>
+                </div>
+
+                <div class="info-box">
+                    <strong>Connection Details:</strong> In Remmina, create a new RDP connection using your Fedora server's IP address and port 3389.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> Additional Information</h2>
+                
+                <div class="info-box">
+                    <strong>Security Tips:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Consider changing the default SSH port (22) for additional security</li>
+                        <li>Use key-based authentication instead of passwords when possible</li>
+                        <li>Regularly update your system and SSH server</li>
+                        <li>Monitor SSH login attempts in <code>/var/log/secure</code></li>
+                    </ul>
+                </div>
+
+                <div class="info-box warning">
+                    <strong>Troubleshooting:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>If SSH connection fails, check if the service is running with <code>systemctl status sshd</code></li>
+                        <li>Verify firewall settings with <code>firewall-cmd --list-services</code></li>
+                        <li>Check network connectivity with <code>ping</code> command</li>
+                        <li>For xrdp issues, check logs with <code>journalctl -u xrdp</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const codeBlock = button.parentElement.parentElement.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+                button.textContent = 'Failed';
+                setTimeout(function() {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

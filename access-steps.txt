@@ -1,0 +1,33 @@
+Enable and Start the SSH Server
+
+sudo dnf install -y openssh-server
+sudo systemctl enable --now sshd
+
+
+Check SSH Server Status
+sudo systemctl status sshd
+
+Adjust the Firewall (firewalld)
+sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --reload
+
+Confirm Port is Open
+sudo ss -tlnp | grep 22
+
+
+Using xrdp 
+
+On Fedora Host:
+
+sudo dnf install -y xrdp
+sudo systemctl enable --now xrdp
+sudo firewall-cmd --permanent --add-port=3389/tcp
+sudo firewall-cmd --reload
+
+then your peronal machine - (Debian)
+
+sudo apt install remmina
+
+remmina
+
+

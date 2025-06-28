@@ -1,0 +1,23 @@
+Check Virtualization Support
+
+egrep -c '(vmx|svm)' /proc/cpuinfo
+
+Install Virtualization Packages
+
+sudo dnf install -y @virtualization virt-manager libvirt-daemon-config-network libvirt-daemon-kvm bridge-utils
+
+
+Start and Enable libvirtd
+
+sudo systemctl enable --now libvirtd
+
+then Check status:
+systemctl status libvirtd
+
+Add Your User to the libvirt Group
+sudo usermod -aG libvirt $(whoami)
+
+(Optional) Enable Nested Virtualization
+sudo sh -c 'echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf'
+sudo modprobe -r kvm_intel && sudo modprobe kvm_intel
+
