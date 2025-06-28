@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Software Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d3436;
+            --accent-color: #00cec9;
+            --text-color: #2d3436;
+            --light-bg: #f5f6fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+        }
+
+        .header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            background: linear-gradient(135deg, #0c0c0c 0%, #2d3436 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/ramanuj-dad/ramanuj-dad.github.io/main/assets/circuit-pattern.svg') repeat;
+            opacity: 0.1;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .content {
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .geometric-graphic {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-color);
+            transform-style: preserve-3d;
+        }
+
+        .shape1 { animation: pulse 4s ease-in-out infinite; }
+        .shape2 { animation: pulse 4s ease-in-out infinite 1s; }
+        .shape3 { animation: pulse 4s ease-in-out infinite 2s; }
+
+        .shape1::before,
+        .shape1::after,
+        .shape2::before,
+        .shape2::after,
+        .shape3::before,
+        .shape3::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .shape1::before { top: -10px; left: -10px; }
+        .shape1::after { bottom: -10px; right: -10px; }
+        .shape2::before { top: -10px; right: -10px; }
+        .shape2::after { bottom: -10px; left: -10px; }
+        .shape3::before { top: 50%; left: -10px; transform: translateY(-50%); }
+        .shape3::after { top: 50%; right: -10px; transform: translateY(-50%); }
+
+        @keyframes rotate {
+            from { transform: rotateY(0) rotateX(0); }
+            to { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0.8) rotate(360deg); opacity: 0.5; }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleFade 1s ease-in;
+        }
+
+        @keyframes titleFade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            transform: translateY(-5px);
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .ninja-avatar {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="content">
+            <h1>AI Software Engineer</h1>
+            <p class="subtitle">Crafting Intelligent Solutions</p>
+            <p>Seasoned technologist specializing in artificial intelligence, machine learning, and software architecture. Building the future, one algorithm at a time.</p>
+            
+            <div class="tech-stack">
+                <i class="fab fa-python tech-icon" title="Python"></i>
+                <i class="fab fa-js tech-icon" title="JavaScript"></i>
+                <i class="fab fa-react tech-icon" title="React"></i>
+                <i class="fab fa-aws tech-icon" title="AWS"></i>
+                <i class="fas fa-brain tech-icon" title="AI/ML"></i>
+            </div>
+
+            <a href="#contact" class="cta-button">Get in touch</a>
+        </div>
+        <div class="geometric-graphic">
+            <div class="geometric-shape shape1"></div>
+            <div class="geometric-shape shape2"></div>
+            <div class="geometric-shape shape3"></div>
+        </div>
+    </header>
+</body>
+</html>
